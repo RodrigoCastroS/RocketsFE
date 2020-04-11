@@ -6,13 +6,15 @@ var displayRocket1 = document.querySelector("#displayRocket1");
 var displayRocket2 = document.querySelector("#displayRocket2");
 var infoRocket1 = document.querySelector("#infoRocket1");
 var infoRocket2 = document.querySelector("#infoRocket2");
+var displayTotalSpeed = document.querySelector("#displayTotalSpeed");
+var totalSpeed = 0;
 function createRocket1() {
     rocket1 = new Rocket("SFROET4");
     rocket1.addEngine(new Engine(10));
     rocket1.addEngine(new Engine(30));
     rocket1.addEngine(new Engine(80));
-    displayRocket1.classList.remove("d-none");
-    infoRocket1.innerHTML = "The rocket " + rocket1.name + " has " + rocket1.engines.length + " engines.";
+    displayRocket1.classList.replace("d-none", "d-flex");
+    infoRocket1.innerHTML = "The rocket " + rocket1.name + " has " + rocket1.engines.length + " engines. The total speed is " + totalSpeed;
 }
 ;
 function createRocket2() {
@@ -26,22 +28,29 @@ function createRocket2() {
 }
 function increaseSpeed(engines) {
     var engineNum = 1;
-    var totalSpeed = 0;
+    // let totalSpeed = 0;
     // infoRocket1.innerHTML = "";
     engines.forEach(function (engine) {
         var maxSpeed = engine.maxSpeed;
         var speed = engine.speed;
         if (maxSpeed === speed) {
-            console.log("Engine " + engineNum + " MAX speed reached");
+            var alert_1 = document.createElement("div");
+            alert_1.className = "alert alert-danger";
+            alert_1.innerHTML = "Engine " + engineNum + " MAX speed reached";
+            infoRocket1.appendChild(alert_1);
+            // console.log("Engine "+ engineNum +" MAX speed reached");
         }
         else {
             engine.accelerate();
-            totalSpeed += engine.speed;
         }
         engineNum++;
+        totalSpeed += engine.speed;
         console.log(totalSpeed);
     });
-    infoRocket1.innerHTML += " Total speed is " + totalSpeed;
+    // const infoTotalSpeed = document.createElement("div");
+    // infoTotalSpeed.textContent = " Total speed is "+ totalSpeed;
+    // infoRocket1.appendChild(infoTotalSpeed); 
+    // infoRocket1.innerHTML = totalSpeed;
 }
 function decreaseSpeed(engines) {
     var engineNum = 1;

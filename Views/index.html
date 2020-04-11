@@ -17,14 +17,14 @@
         <div class="container">
             <h1 class="display-4 text-center mt-4">Launching Rockets</h1>
             <div class="row d-flex justify-content-center">
-                <div class="card p-4 col-md-3  m-3">
+                <div id="card1" class="card p-4 col-md-3  m-3">
                     <h3 class="text-center">Rocket 1</h3>
                     <button class="btn btn-outline-primary m-2"   onclick="createRocket1()">Create Rocket</button>
                     <button class="btn btn-outline-secondary m-2" onclick="increaseSpeed(rocket1.engines)">Accelerate</button>
                     <button class="btn btn-outline-secondary m-2" onclick="decreaseSpeed(rocket1.engines)">Break</button>
                     <button class="btn btn-outline-secondary m-2" onclick="display()">Print Info</button>
                 </div>
-                <div class="card p-4 col-md-3 m-3">
+                <div id="card2" class="card p-4 col-md-3 m-3">
                     <h3 class="text-center">Rocket 2</h3>
                     <button class="btn btn-outline-primary m-2">Create Rocket</button>
                     <button class="btn btn-outline-secondary m-2">Accelerate</button>
@@ -34,14 +34,16 @@
             </div>
             <div class="row d-none justify-content-center" id="displayRocket1">
                 <img class="rocket" src="../assets/img/rocket.svg" alt="rocket icon">
-                <div class="card col-md-6 m-3" display="none">
+                <div class="card col-md-6 m-3 shadow-sm" display="none">
                     <div id="infoRocket1" class="card-body">
+
+                        <div id=displayTotalSpeed>Hola</div>
                     </div>
                 </div>
             </div>
             <div class="row d-none justify-content-center" id="displayRocket2">
                 <img class="rocket" src="../assets/img/rocket.svg" alt="rocket icon">
-                <div class="card col-md-6 m-3">
+                <div class="card col-md-6 m-3 shadow-sm">
                     <div id="infoRocket2" class="card-body">
                         This is some text within a card body 2.
                     </div>
@@ -52,3 +54,4 @@
     <script src="../Controllers/controller.js"></script>
     </body> 
 </html>
+
