@@ -1,0 +1,14 @@
+div div.card:hover{
+    border-radius:3px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.16), 0px 2px 10px rgba(0,0,0,0.12);
+    transition: ease-in-out 200ms;
+    /* animation-duration: 700ms;     */
+}
+
+.rocket{
+    width:7%;
+}
+
+#displayRocket{
+    display: none;
+}
