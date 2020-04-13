@@ -13,3 +13,7 @@
     width:7%;
     
 }
+
+#alert{
+    transition: fade-out 200ms ;
+}

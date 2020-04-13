@@ -21,35 +21,39 @@
                     <h3 class="text-center">Rocket 1</h3>
                     <button class="btn btn-outline-primary m-2"   onclick="createRocket1()">Create Rocket</button>
                     <button class="btn btn-outline-secondary m-2" onclick="increaseSpeed(rocket1.engines)">Accelerate</button>
-                    <button class="btn btn-outline-secondary m-2" onclick="decreaseSpeed(rocket1.engines)">Break</button>
-                    <button class="btn btn-outline-secondary m-2" onclick="display()">Print Info</button>
+                    <button class="btn btn-outline-secondary m-2" onclick="decreaseSpeed(rocket1.engines)">Brake</button>
+                    <button class="btn btn-outline-secondary m-2" onclick="display(rocket1)">Print Info</button>
                 </div>
                 <div id="card2" class="card p-4 col-md-3 m-3">
                     <h3 class="text-center">Rocket 2</h3>
-                    <button class="btn btn-outline-primary m-2">Create Rocket</button>
-                    <button class="btn btn-outline-secondary m-2">Accelerate</button>
-                    <button class="btn btn-outline-secondary m-2">Break</button>
-                    <button class="btn btn-outline-secondary m-2">Print Info</button>
+                    <button class="btn btn-outline-primary m-2" onclick="createRocket2()">Create Rocket</button>
+                    <button class="btn btn-outline-secondary m-2" onclick="increaseSpeed(rocket2.engines)">Accelerate</button>
+                    <button class="btn btn-outline-secondary m-2" onclick="decreaseSpeed(rocket2.engines)">Brake</button>
+                    <button class="btn btn-outline-secondary m-2" onclick="display(rocket2)">Print Info</button>
                 </div>
             </div>
             <div class="row d-none justify-content-center" id="displayRocket1">
                 <img class="rocket" src="../assets/img/rocket.svg" alt="rocket icon">
                 <div class="card col-md-6 m-3 shadow-sm" display="none">
-                    <div id="infoRocket1" class="card-body">
-
-                        <div id=displayTotalSpeed>Hola</div>
+                    <div class="card-body">
+                        <span id="infoRocket1"></span>
+                        <span id="rocket1TotalSpeed"></span>
+                    </div>
+                    <div id="alert1">
                     </div>
                 </div>
             </div>
             <div class="row d-none justify-content-center" id="displayRocket2">
                 <img class="rocket" src="../assets/img/rocket.svg" alt="rocket icon">
                 <div class="card col-md-6 m-3 shadow-sm">
-                    <div id="infoRocket2" class="card-body">
-                        This is some text within a card body 2.
+                    <div class="card-body">
+                        <span id="infoRocket2"></span>
+                        <span id="rocket2TotalSpeed"></span>
+                    </div>
+                    <div id="alert2">
                     </div>
                 </div>
             </div>
-        </div>
     <!-- Controller script -->
     <script src="../Controllers/controller.js"></script>
     </body> 

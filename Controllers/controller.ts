@@ -1,4 +1,4 @@
-
+/* ------------------------------global VARIABLES ------------------------------------- */
 let rocket1: Rocket;
 let rocket2: Rocket;
 let engines1: Engine;
@@ -7,20 +7,33 @@ let displayRocket1 = document.querySelector("#displayRocket1") as HTMLHeadElemen
 let displayRocket2 = document.querySelector("#displayRocket2") as HTMLHeadElement;
 let infoRocket1 = document.querySelector("#infoRocket1") as HTMLHeadElement;
 let infoRocket2 = document.querySelector("#infoRocket2") as HTMLHeadElement;
-let displayTotalSpeed = document.querySelector("#displayTotalSpeed") as HTMLHeadElement;
-let totalSpeed: number = 0;
+let alertInfo1 = document.querySelector("#alert1") as HTMLElement;
+let alertInfo2 = document.querySelector("#alert2") as HTMLElement;
+let rocket1TotalSpeed = document.querySelector("#rocket1TotalSpeed") as HTMLHeadElement;
+let rocket2TotalSpeed = document.querySelector("#rocket2TotalSpeed") as HTMLHeadElement;
+let displayTotalSpeed: string;
+/* ------------------------------ global VARIABLES END ------------------------------------- */
 
+
+
+/* ------------------ Creating Objects -------------------- */
 function createRocket1(){
+    alertInfo1.innerHTML = "";
+    alertInfo2.innerHTML = "";
+    rocket1TotalSpeed.innerHTML = "";
     rocket1 = new Rocket("SFROET4");
     rocket1.addEngine(new Engine(10));
     rocket1.addEngine(new Engine(30));
     rocket1.addEngine(new Engine(80));
-
+    
     displayRocket1.classList.replace("d-none", "d-flex");
-    infoRocket1.innerHTML = "The rocket "+ rocket1.name + " has " + rocket1.engines.length + " engines. The total speed is " + totalSpeed;  
+    infoRocket1.innerHTML = "The rocket "+ rocket1.name + " has " + rocket1.engines.length + " engines.";  
 };
 
 function createRocket2(){
+    alertInfo1.innerHTML = "";
+    alertInfo2.innerHTML = "";
+    rocket2TotalSpeed.innerHTML = "";
     rocket2 = new Rocket("JDKF93S");
     rocket2.addEngine(new Engine(30));
     rocket2.addEngine(new Engine(40));
@@ -28,24 +41,37 @@ function createRocket2(){
     rocket2.addEngine(new Engine(50));
     rocket2.addEngine(new Engine(30));
     rocket2.addEngine(new Engine(10));
+    
+    displayRocket2.classList.replace("d-none", "d-flex");
+    infoRocket2.innerHTML = "The rocket "+ rocket2.name + " has " + rocket2.engines.length + " engines.";  
 }
+/* ------------------------------ Creating Objects END ------------------------------------- */
 
+
+/* ------------------------------ FUNCTIONS ------------------------------------- */
 
 function increaseSpeed(engines:any){
+    //reset all values before the loop
     let engineNum = 1;
-    // let totalSpeed = 0;
-    // infoRocket1.innerHTML = "";
+    let totalSpeed = 0;
+    alertInfo1.innerHTML = "";
+    alertInfo2.innerHTML = "";
+    //checks every engine depending on the object as an argument
     engines.forEach(function(engine:Engine){
         let maxSpeed = engine.maxSpeed;
         let speed = engine.speed;
         if(maxSpeed === speed){
-            let alert = document.createElement("div");
-            alert.className = "alert alert-danger";
-            alert.innerHTML = "Engine "+ engineNum +" MAX speed reached";
-            infoRocket1.appendChild(alert);
-
-            // console.log("Engine "+ engineNum +" MAX speed reached");
-
+            let rocketAlert = `<div class="d-flex alert alert-danger">
+            Engine <b> ${engineNum} </b> MAX speed reached at <strong>${maxSpeed}</strong><br>
+            </div>`;
+            //Checks which rocket we should print the alert info to.
+            if(engines.length == 3){
+                alertInfo1.classList.replace("d-none", "d-flex");
+                alertInfo1.innerHTML += rocketAlert;
+            }else if(engines.length == 6){
+                alertInfo2.classList.replace("d-none", "d-flex");
+                alertInfo2.innerHTML += rocketAlert;
+            }
         }else{
             engine.accelerate();
         }
@@ -53,41 +79,53 @@ function increaseSpeed(engines:any){
         totalSpeed += engine.speed;
         console.log(totalSpeed);
     });
-   
-    // const infoTotalSpeed = document.createElement("div");
-    // infoTotalSpeed.textContent = " Total speed is "+ totalSpeed;
-    // infoRocket1.appendChild(infoTotalSpeed); 
-    // infoRocket1.innerHTML = totalSpeed;
+    
+    // Checks where to print the value of total speed
+    displayTotalSpeed = `The total speed is <strong>${totalSpeed}</strong>.`;
+    if(engines.length == 3){
+        rocket1TotalSpeed.innerHTML = displayTotalSpeed;
+    }else if(engines.length == 6){
+        rocket2TotalSpeed.innerHTML = displayTotalSpeed;
+    }
+    
 } 
 
 function decreaseSpeed(engines:any){
+    //reset all values before the loop
     let engineNum = 1;
-    let totalSpeed:number;
+    let totalSpeed = 0;
+    alertInfo1.innerHTML = "";
+    alertInfo2.innerHTML = "";
+    //checks every engine depending on the object as an argument
     engines.forEach(function(engine:Engine){
-        let maxSpeed = engine.maxSpeed;
         let speed = engine.speed;
-        totalSpeed += speed;
         if(speed <= 0 ){
-            console.log("Engine "+ engineNum +" MIN speed reached");
-            
+            let rocketAlert = `<div class="d-flex alert alert-danger">
+            Engine <b> ${engineNum} </b> reached its MIN speed
+            </div>`;
+            //Checks which rocket we should print the alert info to.
+            if(engines.length == 3){
+                alertInfo1.classList.replace("d-none", "d-flex");
+                alertInfo1.innerHTML += rocketAlert;
+            }else if(engines.length == 6){
+                alertInfo2.classList.replace("d-none", "d-flex");
+                alertInfo2.innerHTML += rocketAlert;
+            }
         }else{
             engine.decelerate();
         }
         engineNum++;
+        totalSpeed += engine.speed;
         console.log(totalSpeed);
     });
+    // revisar donde se printea la info de acelerar ==> si en rocket 1 o en el 2
+    displayTotalSpeed =`The total speed is <strong>${totalSpeed}</strong>.`;
+    if(engines.length === 3){
+        rocket1TotalSpeed.innerHTML = displayTotalSpeed;
+    }else if(engines.length === 6){
+        rocket2TotalSpeed.innerHTML = displayTotalSpeed;
+    }
     
 } 
 
-// rocket1.engines.forEach(engine => console.log(engine.speed));
-function display(){ 
-    console.log("rocket1 engine1 speed: " + rocket1.engines[0].getSpeed);
-    console.log("rocket1 engine2 speed: " + rocket1.engines[1].getSpeed);
-    console.log("rocket1 engine3 speed: " + rocket1.engines[2].getSpeed);
-
-    console.log("TOTAL SPEED: "+ (rocket1.engines[0].speed + rocket1.engines[1].speed + rocket1.engines[2].speed));
-    
-};
- 
- 
-// rocket1.engines.forEach(engine => engine.decelerate());
+/* ------------------------------ FUNCTIONS END ------------------------------------- */
